@@ -30,7 +30,7 @@ end
 function api.on_message(message)
     if message.text
     and message.text:match("/run") then
-        local data = message.text:match("/run%s*(.+)")
+        local data = message.text:match("/run%g*%s*(.+)")
         local mess = run(data)
 
         local result = api.send_message(message.chat.id,
@@ -46,7 +46,7 @@ function api.on_edited_message(message)
     if response_message
     and message.text
     and message.text:match("/run") then
-        local data = message.text:match("/run%s*(.+)")
+        local data = message.text:match("/run%g*%s*(.+)")
         local mess = run(data)
 
         api.edit_message_text(message.chat.id, response_message,
