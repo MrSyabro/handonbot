@@ -28,7 +28,7 @@ function api.on_message(message)
 
         api.send_message(message.chat.id,
                 table.concat(mess),
-                "Markdown", true, true, message.id)
+                "Markdown", true, true, message.message_id)
     end
 end
 
