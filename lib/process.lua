@@ -41,7 +41,16 @@ local penv = {
 }
 
 function M.run (data)
-    local out = {}
+    local out,state = {}, {}
+    local start_time = os.time()
+
+    local function hook(mask)
+        if os.time() - start_time > 5 then
+            print ("Many time")
+            error ("timeout")
+        end
+    end
+
     local env = setmetatable({
         print = function(...)
             local str = {}
@@ -56,10 +65,16 @@ function M.run (data)
     if not func then return false, err
     end
 
-    local state = table.pack(pcall(func))
-    if not state[1] then return false, state[2]
+    local thread = coroutine.create(func)
+    debug.sethook(thread, hook, "c", 5)
+    while coroutine.status(thread) ~= "dead" do
+        local res, rets = coroutine.resume(thread)
+        if res then
+            table.insert(state, rets)
+        else
+            return false, rets
+        end
     end
-    table.remove(state, 1)
 
     return true, state, table.concat(out, "\n")
 end

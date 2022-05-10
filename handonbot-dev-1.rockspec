@@ -1,7 +1,7 @@
 package = "handonbot"
 version = "dev-1"
 source = {
-   url = "git+ssh://git@github.com/MrSyabro/handonbot.git",
+   url = "git+https://github.com/MrSyabro/handonbot.git",
    branch = "devel"
 }
 description = {
