@@ -38,7 +38,8 @@ function api.on_message(message)
             table.concat(mess),
             "Markdown", true, true, message.message_id)
 
-        if type(result.result) == "table"
+        if type(result) == "table"
+        and result.result
         and result.result.message_id then
             messages[message.message_id] = result.result.message_id
         end
