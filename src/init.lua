@@ -1,5 +1,5 @@
 #!/usr/bin/env lua
-local config = dofile(arg[1] == "-d" and "config.lua" or "/etc/handonbot.lua")
+local config = dofile(arg[1] == "-c" and arg[2] or "config.lua")
 local api = require("telegram-bot-lua.core").configure(config.token)
 local proc = require("process")
 local s = require("serialize")
@@ -38,7 +38,10 @@ function api.on_message(message)
             table.concat(mess),
             "Markdown", true, true, message.message_id)
 
-        messages[message.message_id] = result.result.message_id
+        if result.result
+        and result.result.message_id then
+            messages[message.message_id] = result.result.message_id
+        end
     end
 end
 
