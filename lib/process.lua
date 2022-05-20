@@ -38,6 +38,20 @@ local penv = {
         date = os.date,
         difftime = os.difftime,
     },
+    tohex = function(str)
+        if type(str) == "string" then
+            return (str:gsub('.', function (c)
+                return string.format('%02x', string.byte(c))
+            end))
+        elseif type(str) == "number" then
+            return string.format("%x", str)
+        end
+    end,
+    fromhex = function(str)
+        return (str:gsub('..', function (cc)
+            return string.char(tonumber(cc, 16))
+        end))
+    end,
 }
 
 function M.run (data)
@@ -58,7 +72,7 @@ function M.run (data)
                 str[k] = tostring(d)
             end
             table.insert(out, table.concat(str, "\t"))
-        end
+        end,
     }, {__index = penv})
 
     local func, err = load(data, "userdata", "t", env)
