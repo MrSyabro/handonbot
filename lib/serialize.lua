@@ -1,6 +1,6 @@
 local M = {}
 
-function ser (o, readable, prefix)
+local function ser (o, readable, prefix)
 	local p = prefix or ""
 	local r = readable or false
 	local out = {}
@@ -20,6 +20,8 @@ function ser (o, readable, prefix)
 			end
 		end
 		table.insert(out, p.."}")
+	elseif type(o) == "function" then
+		out[1] = ("load(%q)"):format(string.dump(o, not readable))
 	else
 		out[1] = string.format("%q", type(o))
 	end
@@ -27,6 +29,10 @@ function ser (o, readable, prefix)
 	return table.concat(out)
 end
 
+---Deserialize string
+---@param str string
+---@return table?
+---@return string?
 function M.deser(str)
 	local f, err = load("return "..str, "desrialize", "tb", {})
 	if not f then return nil, err end
@@ -34,6 +40,10 @@ function M.deser(str)
 	return data
 end
 
+---Deserialize file
+---@param filepath string
+---@return nil
+---@return string?
 function M.deser_file(filepath)
 	local file, err = io.open(filepath)
 	if not file then return nil, err end
@@ -42,11 +52,25 @@ function M.deser_file(filepath)
 	return M.deser(str)
 end
 
+---Serialize file
+---@param filepath string
+---@param data any
+---@param readable boolean
+---@return nil
+---@return string?
 function M.ser_file(filepath, data, readable)
 	local file, err = io.open(filepath, "w")
 	if not file then return nil, err end
 	file:write(ser(data, readable))
 	file:close()
+end
+
+---Serialize to bin format
+---@param obj any
+---@return string
+function M.to_bin(obj)
+	local ser_obj = ser(obj)
+	return string.dump(load("return "..ser_obj), true)
 end
 
 M.ser = ser
