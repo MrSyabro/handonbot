@@ -1,6 +1,7 @@
 local https = require ("ssl.https")
 local http = require ("socket.http")
 local json = require ("dkjson")
+local serialize = require ("serialize")
 
 local M = {}
 
@@ -32,6 +33,7 @@ local penv = {
     https = setmetatable({}, {__index = https}),
     http = setmetatable({}, {__index = http}),
     json = setmetatable({}, {__index = json}),
+    serialize = setmetatable({}, {__index = serialize}),
     os = {
         clock = os.clock,
         time = os.time,
