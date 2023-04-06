@@ -1,6 +1,6 @@
 local https = require ("ssl.https")
 local http = require ("socket.http")
-local json = require ("dkjson")
+local json = require ("cjson")
 local serialize = require ("serialize")
 
 local M = {}

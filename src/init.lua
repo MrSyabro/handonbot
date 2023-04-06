@@ -1,4 +1,4 @@
-#!/usr/bin/env lua
+#!/usr/bin/env lua5.3
 local config = dofile(arg[1] == "-c" and arg[2] or "config.lua")
 local api = require("telegram-bot-lua.core").configure(config.token)
 local proc = require("process")

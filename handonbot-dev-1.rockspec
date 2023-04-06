@@ -13,7 +13,7 @@ dependencies = {
    "telegram-bot-lua",
    "luafilesystem",
    "luasec",
-   "dkjson",
+   "cjson",
 }
 build = {
    type = "builtin",
