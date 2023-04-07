@@ -1,4 +1,4 @@
-FROM imolein/luarocks:5.4
+FROM mrsyabro/tgbotlua
 
 COPY . .
 
