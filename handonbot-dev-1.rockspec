@@ -2,7 +2,7 @@ package = "handonbot"
 version = "dev-1"
 source = {
    url = "git+https://github.com/MrSyabro/handonbot.git",
-   branch = "devel"
+   branch = "master"
 }
 description = {
    homepage = "https://github.com/MrSyabro/handonbot",

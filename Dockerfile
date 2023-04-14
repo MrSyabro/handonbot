@@ -1,6 +1,8 @@
 FROM mrsyabro/tgbotlua
 
-COPY . .
+COPY src src
+COPY lib lib
+COPY handonbot-dev-1.rockspec .
 
 RUN luarocks make handonbot-dev-1.rockspec
 
