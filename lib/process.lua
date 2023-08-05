@@ -2,6 +2,7 @@ local https = require ("ssl.https")
 local http = require ("socket.http")
 local json = require ("dkjson")
 local serialize = require ("serialize")
+local pkg = require ("http_package")
 
 local M = {}
 
@@ -54,6 +55,8 @@ local penv = {
             return string.char(tonumber(cc, 16))
         end))
     end,
+    require = pkg.require,
+    package = pkg,
 }
 
 function M.run (data)
