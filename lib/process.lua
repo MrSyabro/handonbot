@@ -2,7 +2,7 @@ local https = require ("ssl.https")
 local http = require ("socket.http")
 local json = require ("dkjson")
 local serialize = require ("serialize")
-local pkg = require ("http_package")
+local pkg = require ("https_package")
 
 local M = {}
 
