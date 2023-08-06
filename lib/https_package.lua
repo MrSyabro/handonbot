@@ -11,7 +11,7 @@ return function(env)
         local res = assert(load(data, "uri", "t", env))()
         loaded[name] = res
 
-        return res
+        return res, name
     end
 
     return require
