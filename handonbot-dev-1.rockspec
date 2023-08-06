@@ -20,6 +20,7 @@ build = {
         lua = {
             process = "lib/process.lua",
             serialize = "lib/serialize.lua",
+            https_package = "lib/https_package.lua",
         },
         bin = { handonbot = "src/init.lua" },
    }
