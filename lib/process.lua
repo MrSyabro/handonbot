@@ -78,7 +78,7 @@ function M.run (data)
         end,
     }, {__index = penv})
 
-    env.package, env.require = pkg(env)
+    env.require = pkg(env)
 
     local func, err = load(data, "userdata", "t", env)
     if not func then return false, err
