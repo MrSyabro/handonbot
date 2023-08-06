@@ -55,8 +55,6 @@ local penv = {
             return string.char(tonumber(cc, 16))
         end))
     end,
-    require = pkg.require,
-    package = pkg,
 }
 
 function M.run (data)
@@ -79,6 +77,8 @@ function M.run (data)
             table.insert(out, table.concat(str, "\t"))
         end,
     }, {__index = penv})
+
+    env.package, env.require = pkg(env)
 
     local func, err = load(data, "userdata", "t", env)
     if not func then return false, err

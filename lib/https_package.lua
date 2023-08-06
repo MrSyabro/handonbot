@@ -1,16 +1,15 @@
 local https = require ("ssl.https")
 
-local M = {}
+return function(env)
+    local package_t = {}
+    local function require(uri)
+        if package_t.loaded[uri] then return package_t.loaded[uri] end
+        local data = assert(https.request(uri))
+        local res = assert(load(data, "uri", "t", env))()
+        package_t.loaded[uri] = res
 
-M.loaded = {}
+        return res
+    end
 
-function M.require(uri)
-    if M.loaded[uri] then return M.loaded[uri] end
-    local data = assert(https.request(uri))
-    local res = assert(load(data))()
-    M.loaded[uri] = res
-
-    return res
+    return package_t, require
 end
-
-return M
