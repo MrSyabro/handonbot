@@ -41,6 +41,17 @@ local penv = {
         date = os.date,
         difftime = os.difftime,
     },
+    debug = {
+        traceback = debug.traceback,
+        getinfo = debug.getinfo,
+        getupvalue = debug.getupvalue,
+        getuserdata = debug.getuservalue,
+        getlocal = debug.getlocal,
+        setlocal = debug.setlocal,
+        setuservalue = debug.setuservalue,
+        upvalueid = debug.upvalueid,
+        upvaluejoin = debug.upvaluejoin,
+    },
     tohex = function(str)
         if type(str) == "string" then
             return (str:gsub('.', function (c)
