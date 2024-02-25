@@ -106,7 +106,14 @@ function M.run (data)
         end
     end
 
-    return true, state, table.concat(out, "\n")
+    local out = table.concat(out, "\n"):sub(1, 1000)
+    local nlc = 0
+    for out:gmatch("\n") do
+			nlc = nlc + 1
+    end
+    if nlc > 10 then error("you are ahueli?") end
+
+    return true, state, out
 end
 
 return M
