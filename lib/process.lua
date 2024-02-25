@@ -107,6 +107,7 @@ function M.run (data)
     end
 
     local out = table.concat(out, "\n"):sub(1, 1000)
+    out = out:gsub("@%w+", "[mention not alowed]")
     local nlc = 0
     for out:gmatch("\n") do
 			nlc = nlc + 1
