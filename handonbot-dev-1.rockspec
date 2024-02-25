@@ -10,8 +10,11 @@ description = {
 }
 dependencies = {
    "lua >= 5.2",
-   "telegram-bot-lua",
    "luafilesystem",
+   "dkjson",
+   "luasocket",
+   "luasec",
+   "telegram-bot-lua",
 }
 build = {
    type = "builtin",

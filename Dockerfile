@@ -1,4 +1,4 @@
-FROM mrsyabro/tgbotlua
+FROM imolein/luarocks:5.4
 
 COPY src src
 COPY lib lib
