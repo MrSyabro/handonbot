@@ -106,13 +106,7 @@ function M.run (data)
         end
     end
 
-    local out = table.concat(out, "\n"):sub(1, 1000)
-    out = out:gsub("@%w+", "[mention not alowed]")
-    local nlc = 0
-    for out:gmatch("\n") do
-			nlc = nlc + 1
-    end
-    if nlc > 10 then error("you are ahueli?") end
+    local out = table.concat(out, "\n", 1, math.min(10, #out)):gsub("@%w+", "[mention not alowed]"):sub(1,1000)
 
     return true, state, out
 end
